@@ -29,38 +29,6 @@ def inserir_musica():
     })
     print("Música adicionada!")
 
-def remover_musica():
-    if not biblioteca:
-        print("\nBiblioteca vazia. Não há músicas para remover.")
-        return
-    print("\n--- REMOVER MÚSICA ---")
-    for i, m in enumerate(biblioteca, start=1):
-        print(f"{i}. {m['Título']} - {m['Artista']}")
-
-    escolha = input("Escolhe o número ou o título da música a remover (0 para cancelar): ").strip()
-    if escolha == "0":
-        print("Remoção cancelada.")
-        return
-
-    # Tenta remover pelo número da lista
-    if escolha.isdigit():
-        indice = int(escolha) - 1
-        if 0 <= indice < len(biblioteca):
-            removida = biblioteca.pop(indice)
-            print(f"Música '{removida['Título']}' removida com sucesso!")
-            return
-        print("Número inválido!")
-        return
-
-    # Caso contrário, tenta remover pelo título (ignorando maiúsculas/minúsculas)
-    for i, m in enumerate(biblioteca):
-        if m["Título"].lower() == escolha.lower():
-            removida = biblioteca.pop(i)
-            print(f"Música '{removida['Título']}' removida com sucesso!")
-            return
-
-    print("Música não encontrada na biblioteca.")
-
 
 while True:
     print("\n=== MENU FAROESTE ===")
