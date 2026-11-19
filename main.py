@@ -5,6 +5,7 @@ while True:
     print("\n=== MENU FAROESTE ===")
     print("1 - Ver biblioteca")
     print("2 - Inserir música")
+    print("3 - Remover musica")
     print("0 - Sair")
 
     opcao = input("Escolhe uma opção: ")
