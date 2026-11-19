@@ -13,6 +13,8 @@ while True:
         biblioteca_musicas()
     elif opcao == "2":
         inserir_musica()
+    elif opcao == "3":
+            remover_musica()
     elif opcao == "0":
         print("A sair...")
         break
