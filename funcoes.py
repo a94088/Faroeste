@@ -39,3 +39,12 @@ def remover_musica():
             return
 
     print("Música não encontrada!")
+    
+def pesquisar_musica():
+    procura = input("Procurar: ").lower()
+
+    for m in biblioteca:
+        if procura in m["Título"].lower() or procura in m["Artista"].lower():
+            print(m["Título"], "-", m["Artista"], "-", m["Género"], "-", m["Ano"])
+
+    input("\nENTER para voltar...")
