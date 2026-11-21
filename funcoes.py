@@ -47,7 +47,6 @@ def pesquisar_musica():
         if procura in m["Título"].lower() or procura in m["Artista"].lower():
             print(m["Título"], "-", m["Artista"], "-", m["Género"], "-", m["Ano"])
 
-    input("\nENTER para voltar...")
     
     
 playlists = {}
@@ -82,4 +81,16 @@ def ver_playlists():
         for m in musicas:
             print(m["Título"], "-", m["Artista"])
 
-    input("\nENTER para voltar...")
+def ver_artistas():
+    if not biblioteca:
+        print("\nAinda não existem artistas na biblioteca.")
+        return
+
+    contagem = {}
+    for m in biblioteca:
+        artista = m["Artista"]
+        contagem[artista] = contagem.get(artista, 0) + 1
+
+    print("\n--- ARTISTAS NA FAROESTE ---")
+    for artista, total in contagem.items():
+        print(f"- {artista} ({total} música{'s' if total > 1 else ''})")
