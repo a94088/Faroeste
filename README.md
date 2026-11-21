@@ -10,6 +10,7 @@ Aplicação de linha de comandos em Python para gerir uma biblioteca musical(atu
 - **Pesquisar música** (`4`): procura músicas por título ou artista.
 - **Criar playlist** (`5`): cria uma playlist e adiciona músicas à biblioteca.
 - **Ver playlists** (`6`): apresenta todas as playlists criadas e as respetivas músicas.
+- **Ver artistas** (`7`): apresenta todos os artistas com a respetiva quantidade de músicas presentes na biblioteca.
 
 ## Estrutura do projeto
 
