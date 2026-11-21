@@ -30,3 +30,6 @@ while True:
         break
     else:
         print("Opção inválida!")
+        
+    if opcao != "0":
+        input("\nCarrega ENTER para voltar ao menu...")
