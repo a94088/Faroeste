@@ -1,5 +1,5 @@
 
-from funcoes import biblioteca_musicas, inserir_musica, remover_musica, pesquisar_musica
+from funcoes import biblioteca_musicas, inserir_musica, remover_musica, pesquisar_musica, criar_playlist, ver_playlists
 
 while True:
     print("\n=== MENU FAROESTE ===")
@@ -7,6 +7,8 @@ while True:
     print("2 - Inserir música")
     print("3 - Remover música")
     print("4 - Pesquisar música")
+    print("5 - Criar playlist")
+    print("6 - Ver playlists")
     print("0 - Sair")
 
     opcao = input("Escolhe uma opção: ")
@@ -19,6 +21,10 @@ while True:
         remover_musica()
     elif opcao == "4":
         pesquisar_musica()
+    elif opcao == "5":
+        criar_playlist()
+    elif opcao == "6":
+        ver_playlists()
     elif opcao == "0":
         print("A sair...")
         break

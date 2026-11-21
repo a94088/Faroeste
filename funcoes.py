@@ -48,3 +48,38 @@ def pesquisar_musica():
             print(m["Título"], "-", m["Artista"], "-", m["Género"], "-", m["Ano"])
 
     input("\nENTER para voltar...")
+    
+    
+playlists = {}
+
+def criar_playlist():
+    nome = input("Nome da playlist: ")
+    playlists[nome] = []
+
+    while True:
+        titulo = input("Título da música a adicionar (ou '0' para terminar): ")
+        if titulo == "0":
+            break
+
+        encontrada = False
+        for m in biblioteca:
+            if m["Título"].lower() == titulo.lower():
+                playlists[nome].append(m)
+                print(f"'{m['Título']}' adicionada à playlist '{nome}'!")
+                encontrada = True
+                break
+
+        if not encontrada:
+            print("Música não encontrada na biblioteca!")
+
+def ver_playlists():
+    if not playlists:
+        print("Ainda não existem playlists.")
+        return
+
+    for nome, musicas in playlists.items():
+        print(f"\n--- Playlist: {nome} ---")
+        for m in musicas:
+            print(m["Título"], "-", m["Artista"])
+
+    input("\nENTER para voltar...")
