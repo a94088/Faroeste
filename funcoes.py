@@ -12,11 +12,14 @@ biblioteca_padrao = [
 
 def carregar_dados():
     if os.path.exists(FICHEIRO_DADOS):
-        with open(FICHEIRO_DADOS, "r", encoding="utf-8") as f:
-            dados = json.load(f)
-            return dados.get("biblioteca", []), dados.get("playlists", {})
+        try:
+            with open(FICHEIRO_DADOS, "r", encoding="utf-8") as f:
+                dados = json.load(f)
+            if isinstance(dados, dict):
+                return dados.get("biblioteca", list(biblioteca_padrao)), dados.get("playlists", {})
+        except (json.JSONDecodeError, OSError):
+            print("Aviso: 'dados.json' vazio ou inválido. A carregar dados padrão.")
     return list(biblioteca_padrao), {}
-
 
 def guardar_dados():
     with open(FICHEIRO_DADOS, "w", encoding="utf-8") as f:
