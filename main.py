@@ -1,5 +1,12 @@
-
-from funcoes import biblioteca_musicas, inserir_musica, remover_musica, pesquisar_musica, criar_playlist, ver_playlists, ver_artistas
+from funcoes import (
+    biblioteca_musicas,
+    inserir_musica,
+    remover_musica,
+    pesquisar_musica,
+    criar_playlist,
+    ver_playlists,
+    ver_artistas,
+)
 
 while True:
     print("\n=== MENU FAROESTE ===")
@@ -33,6 +40,6 @@ while True:
         break
     else:
         print("Opção inválida!")
-        
+
     if opcao != "0":
         input("\nCarrega ENTER para voltar ao menu...")

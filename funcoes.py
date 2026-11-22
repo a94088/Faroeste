@@ -1,15 +1,41 @@
-biblioteca = [
+import json
+import os
+
+FICHEIRO_DADOS = "dados.json"
+
+biblioteca_padrao = [
     {"Título": "O Ensaio", "Artista": "Valete", "Género": "Hip-Hop", "Ano": 2006},
     {"Título": "Cafeína", "Artista": "Plutónio", "Género": "Afro", "Ano": 2019},
     {"Título": "Cromossoma", "Artista": "Plutónio", "Género": "Trap", "Ano": 2026},
 ]
 
+
+def carregar_dados():
+    if os.path.exists(FICHEIRO_DADOS):
+        with open(FICHEIRO_DADOS, "r", encoding="utf-8") as f:
+            dados = json.load(f)
+            return dados.get("biblioteca", []), dados.get("playlists", {})
+    return list(biblioteca_padrao), {}
+
+
+def guardar_dados():
+    with open(FICHEIRO_DADOS, "w", encoding="utf-8") as f:
+        json.dump(
+            {"biblioteca": biblioteca, "playlists": playlists},
+            f,
+            ensure_ascii=False,
+            indent=4,
+        )
+
+
+biblioteca, playlists = carregar_dados()
+
+
 def biblioteca_musicas():
     if not biblioteca:
         print("\nBiblioteca vazia")
         return
-    
-def biblioteca_musicas():
+
     print("\n--- BIBLIOTECA FAROESTE ---")
     for m in biblioteca:
         print(m["Título"], "-", m["Artista"], "-", m["Género"], "-", m["Ano"])
@@ -25,9 +51,11 @@ def inserir_musica():
         "Título": titulo,
         "Artista": artista,
         "Género": genero,
-        "Ano": ano
+        "Ano": ano,
     })
+    guardar_dados()
     print("Música adicionada!")
+
 
 def remover_musica():
     titulo = input("Título da música a remover: ")
@@ -35,11 +63,13 @@ def remover_musica():
     for m in biblioteca:
         if m["Título"].lower() == titulo.lower():
             biblioteca.remove(m)
+            guardar_dados()
             print("Música removida!")
             return
 
     print("Música não encontrada!")
-    
+
+
 def pesquisar_musica():
     procura = input("Procurar: ").lower()
 
@@ -47,9 +77,6 @@ def pesquisar_musica():
         if procura in m["Título"].lower() or procura in m["Artista"].lower():
             print(m["Título"], "-", m["Artista"], "-", m["Género"], "-", m["Ano"])
 
-    
-    
-playlists = {}
 
 def criar_playlist():
     nome = input("Nome da playlist: ")
@@ -71,6 +98,9 @@ def criar_playlist():
         if not encontrada:
             print("Música não encontrada na biblioteca!")
 
+    guardar_dados()
+
+
 def ver_playlists():
     if not playlists:
         print("Ainda não existem playlists.")
@@ -80,6 +110,7 @@ def ver_playlists():
         print(f"\n--- Playlist: {nome} ---")
         for m in musicas:
             print(m["Título"], "-", m["Artista"])
+
 
 def ver_artistas():
     if not biblioteca:
