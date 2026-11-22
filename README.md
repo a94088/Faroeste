@@ -11,6 +11,7 @@ Aplicação de comandos em Python para gerir uma biblioteca musical (atualmente)
 - **Criar playlist** (`5`): cria uma playlist e adiciona músicas existentes da biblioteca.
 - **Ver playlists** (`6`): apresenta todas as playlists criadas e as respetivas músicas.
 - **Ver artistas** (`7`): apresenta todos os artistas com a respetiva quantidade de músicas presentes na biblioteca.
+- **Sobre nós** (`8`): informação sobre o projeto.
 
 ## Estrutura do projeto
 

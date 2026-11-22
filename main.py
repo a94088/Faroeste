@@ -6,6 +6,7 @@ from funcoes import (
     criar_playlist,
     ver_playlists,
     ver_artistas,
+    sobre_nos,
 )
 
 while True:
@@ -17,6 +18,7 @@ while True:
     print("5 - Criar playlist")
     print("6 - Ver playlists")
     print("7 - Ver artistas")
+    print("8 - Sobre nós")
     print("0 - Sair")
 
     opcao = input("Escolhe uma opção: ")
@@ -35,6 +37,8 @@ while True:
         ver_playlists()
     elif opcao == "7":
         ver_artistas()
+    elif opcao == "8":
+        sobre_nos()
     elif opcao == "0":
         print("A sair...")
         break

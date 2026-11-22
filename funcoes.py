@@ -125,3 +125,14 @@ def ver_artistas():
     print("\n--- ARTISTAS NA FAROESTE ---")
     for artista, total in contagem.items():
         print(f"- {artista} ({total} música{'s' if total > 1 else ''})")
+
+def sobre_nos():
+    print("\n=== SOBRE NÓS - FAROESTE ===")
+    print(
+        "A Faroeste é uma biblioteca de músicas pensada para organizar "
+        "faixas, descobrir artistas e criar playlists."
+    )
+    print(
+        "Acreditamos numa comunidade aberta: qualquer pessoa pode entrar e "
+        "adicionar as suas músicas a qualquer momento."
+    )
