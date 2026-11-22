@@ -42,10 +42,41 @@ def biblioteca_musicas():
 
 
 def inserir_musica():
-    titulo = input("Título: ")
-    artista = input("Artista: ")
-    genero = input("Género: ")
-    ano = input("Ano: ")
+    while True:
+        titulo = input("Título: ").strip()
+        if titulo:
+            break
+        print("O título não pode estar vazio.")
+
+    while True:
+        artista = input("Artista: ").strip()
+        if artista:
+            break
+        print("O artista não pode estar vazio.")
+
+    for m in biblioteca:
+        if (
+            m.get("Título", "").strip().lower() == titulo.lower()
+            and m.get("Artista", "").strip().lower() == artista.lower()
+        ):
+            print(f"A música '{m['Título']}' de '{m['Artista']}' já existe na biblioteca!")
+            return
+
+    while True:
+        genero = input("Género: ").strip()
+        if genero:
+            break
+        print("O género não pode estar vazio.")
+
+    while True:
+        ano_texto = input("Ano: ").strip()
+        try:
+            ano = int(ano_texto)
+            if 1900 <= ano <= 2100:
+                break
+            print("Indica um ano entre 1900 e 2100.")
+        except ValueError:
+            print("O ano tem de ser um número inteiro (ex.: 2026).")
 
     biblioteca.append({
         "Título": titulo,
@@ -71,12 +102,24 @@ def remover_musica():
 
 
 def pesquisar_musica():
-    procura = input("Procurar: ").lower()
+    procura = input("Procurar: ").strip().lower()
+    if not procura:
+        print("Escreve um título ou artista para pesquisar.")
+        return
 
+    encontrou = False
     for m in biblioteca:
-        if procura in m["Título"].lower() or procura in m["Artista"].lower():
-            print(m["Título"], "-", m["Artista"], "-", m["Género"], "-", m["Ano"])
+        if (
+            procura in m.get("Título", "").lower()
+            or procura in m.get("Artista", "").lower()
+        ):
+            print(
+                m["Título"], "-", m["Artista"], "-", m["Género"], "-", m["Ano"]
+            )
+            encontrou = True
 
+    if not encontrou:
+        print("Nenhuma música encontrada.")
 
 def criar_playlist():
     nome = input("Nome da playlist: ")

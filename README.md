@@ -12,6 +12,7 @@ Aplicação de comandos em Python para gerir uma biblioteca musical (atualmente)
 - **Ver playlists** (`6`): apresenta todas as playlists criadas e as respetivas músicas.
 - **Ver artistas** (`7`): apresenta todos os artistas com a respetiva quantidade de músicas presentes na biblioteca.
 - **Sobre nós** (`8`): informação sobre o projeto.
+- **Estatísticas** (`9`): apresenta o total de músicas e playlists, o género mais comum e as músicas mais antiga e mais recente.
 
 ## Estrutura do projeto
 
