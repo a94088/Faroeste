@@ -1,3 +1,5 @@
+"""Funções da aplicação Faroeste: gestão da biblioteca musical,
+das playlists e gravação dos dados em JSON."""
 import json
 import os
 
@@ -22,6 +24,7 @@ def carregar_dados():
     return list(biblioteca_padrao), {}
 
 def guardar_dados():
+    """Grava a biblioteca e as playlists no ficheiro dados.json."""
     with open(FICHEIRO_DADOS, "w", encoding="utf-8") as f:
         json.dump(
             {"biblioteca": biblioteca, "playlists": playlists},
@@ -35,6 +38,7 @@ biblioteca, playlists = carregar_dados()
 
 
 def biblioteca_musicas():
+    """Mostra todas as músicas da biblioteca (título, artista, género e ano)."""
     if not biblioteca:
         print("\nBiblioteca vazia")
         return
@@ -45,6 +49,9 @@ def biblioteca_musicas():
 
 
 def inserir_musica():
+    """Pede título, artista, género e ano e adiciona a música à biblioteca.
+Valida campos vazios, o ano (1900-2100) e impede músicas duplicadas
+(mesmo título e artista)."""
     while True:
         titulo = input("Título: ").strip()
         if titulo:
@@ -92,6 +99,8 @@ def inserir_musica():
 
 
 def remover_musica():
+    """Remove da biblioteca a música com o título indicado
+(sem distinguir maiúsculas/minúsculas) e guarda as alterações."""
     titulo = input("Título da música a remover: ")
 
     for m in biblioteca:
@@ -105,6 +114,8 @@ def remover_musica():
 
 
 def pesquisar_musica():
+    """Pesquisa músicas cujo título ou artista contenham o texto indicado
+(sem distinguir maiúsculas/minúsculas) e mostra os resultados."""
     procura = input("Procurar: ").strip().lower()
     if not procura:
         print("Escreve um título ou artista para pesquisar.")
@@ -125,6 +136,9 @@ def pesquisar_musica():
         print("Nenhuma música encontrada.")
 
 def criar_playlist():
+    """Cria uma playlist e adiciona músicas existentes na biblioteca.
+Pede confirmação se o nome já existir, não permite repetir músicas
+na mesma playlist e termina quando se escreve '0'."""
     while True:
         nome = input("Nome da playlist: ").strip()
         if nome:
@@ -173,6 +187,7 @@ def criar_playlist():
 
 
 def ver_playlists():
+    """Mostra todas as playlists e as músicas de cada uma."""
     if not playlists:
         print("Ainda não existem playlists.")
         return
@@ -184,6 +199,7 @@ def ver_playlists():
 
 
 def ver_artistas():
+    """Mostra cada artista e o número de músicas que tem na biblioteca."""
     if not biblioteca:
         print("\nAinda não existem artistas na biblioteca.")
         return
@@ -198,6 +214,7 @@ def ver_artistas():
         print(f"- {artista} ({total} música{'s' if total > 1 else ''})")
 
 def sobre_nos():
+    """Mostra a apresentação do projeto Faroeste."""
     print("\n=== SOBRE NÓS - FAROESTE ===")
     print(
         "A Faroeste é uma biblioteca de músicas pensada para organizar "
@@ -209,6 +226,8 @@ def sobre_nos():
     )
 
 def estatisticas_biblioteca():
+    """Mostra o total de músicas e playlists, o género mais comum
+e as músicas mais antiga e mais recente."""
     if not biblioteca:
         print("\nBiblioteca vazia.")
         return
