@@ -122,26 +122,51 @@ def pesquisar_musica():
         print("Nenhuma música encontrada.")
 
 def criar_playlist():
-    nome = input("Nome da playlist: ")
+    while True:
+        nome = input("Nome da playlist: ").strip()
+        if nome:
+            break
+        print("O nome da playlist não pode estar vazio.")
+
+    if nome in playlists:
+        resposta = input(f"A playlist '{nome}' já existe. Queres substituí-la? (s/n): ").strip().lower()
+        if resposta != "s":
+            print("Operação cancelada.")
+            return
+
     playlists[nome] = []
 
     while True:
-        titulo = input("Título da música a adicionar (ou '0' para terminar): ")
+        titulo = input("Título da música a adicionar (ou '0' para terminar): ").strip()
         if titulo == "0":
             break
+        if not titulo:
+            continue
 
-        encontrada = False
+        encontrada = None
         for m in biblioteca:
-            if m["Título"].lower() == titulo.lower():
-                playlists[nome].append(m)
-                print(f"'{m['Título']}' adicionada à playlist '{nome}'!")
-                encontrada = True
+            if m.get("Título", "").strip().lower() == titulo.lower():
+                encontrada = m
                 break
 
         if not encontrada:
             print("Música não encontrada na biblioteca!")
+            continue
+
+        ja_na_playlist = any(
+            item.get("Título", "").strip().lower() == encontrada.get("Título", "").strip().lower()
+            and item.get("Artista", "").strip().lower() == encontrada.get("Artista", "").strip().lower()
+            for item in playlists[nome]
+        )
+
+        if ja_na_playlist:
+            print(f"'{encontrada['Título']}' já está na playlist '{nome}'!")
+        else:
+            playlists[nome].append(encontrada)
+            print(f"'{encontrada['Título']}' adicionada à playlist '{nome}'!")
 
     guardar_dados()
+    print(f"Playlist '{nome}' guardada com sucesso!")
 
 
 def ver_playlists():
