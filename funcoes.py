@@ -136,3 +136,38 @@ def sobre_nos():
         "Acreditamos numa comunidade aberta: qualquer pessoa pode entrar e "
         "adicionar as suas músicas a qualquer momento."
     )
+
+def estatisticas_biblioteca():
+    if not biblioteca:
+        print("\nBiblioteca vazia.")
+        return
+
+    generos = {}
+    for m in biblioteca:
+        g = m.get("Género", "").strip()
+        if g:
+            generos[g] = generos.get(g, 0) + 1
+
+    if generos:
+        genero_top = max(generos, key=generos.get)
+        genero_info = f"{genero_top} ({generos[genero_top]})"
+    else:
+        genero_info = "Sem género"
+
+    com_ano = []
+    for m in biblioteca:
+        try:
+            com_ano.append((int(m["Ano"]), m))
+        except (KeyError, TypeError, ValueError):
+            pass
+
+    print("\n=== ESTATÍSTICAS - FAROESTE ===")
+    print(f"- Total de músicas: {len(biblioteca)}")
+    print(f"- Total de playlists: {len(playlists)}")
+    print(f"- Género mais comum: {genero_info}")
+
+    if com_ano:
+        antiga = min(com_ano, key=lambda x: x[0])[1]
+        recente = max(com_ano, key=lambda x: x[0])[1]
+        print(f"- Música mais antiga: {antiga['Título']} - {antiga['Artista']} ({antiga['Ano']})")
+        print(f"- Música mais recente: {recente['Título']} - {recente['Artista']} ({recente['Ano']})")
